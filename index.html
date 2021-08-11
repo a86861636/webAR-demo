@@ -1,0 +1,52 @@
+<!-- import aframe and then ar.js with image tracking / location based features -->
+<script src="aframe-master.min.js"></script>
+<script src="aframe-ar-nft.js"></script>
+<script src="gestures.js"></script>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+
+<!-- style for the loader -->
+<style>
+  .arjs-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arjs-loader div {
+    text-align: center;
+    font-size: 1.25em;
+    color: white;
+  }
+</style>
+
+<body style="margin : 0px; overflow: hidden;">
+  <!-- minimal loader shown until image descriptors are loaded. Loading may take a while according to the device computational power -->
+  <div class="arjs-loader">
+    <div>正在加载AR模型，请稍候...</div>
+  </div>
+
+  <!-- a-frame scene -->
+  <a-scene vr-mode-ui="enabled: false;" gesture-detector renderer="logarithmicDepthBuffer: true;" embedded
+    arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+    <!-- 图片训练后文件路径，不带文件拓展名！ -->
+    <a-nft type="nft" url="nft/smoking_boy/smoking_boy" smooth="true" smoothCount="10" smoothTolerance=".01"
+      smoothThreshold="5">
+      <!-- 展示模型的路径 -->
+      <a-entity gltf-model="model/smoking_boy/scene.gltf" scale="50 50 50"
+        gesture-handler="minScale: 0.25; maxScale: 10" position="100 0 -200" rotation="-90 0 0">
+      </a-entity>
+    </a-nft>
+    <!-- static camera that moves according to the device movemenents -->
+    <a-entity camera="fov: 190"></a-entity>
+  </a-scene>
+</body>
